@@ -8,7 +8,6 @@ const navItems = [["abstract", "Abstract"], ["method", "Method"], ["results", "R
 export default function Home() {
   const [copied, setCopied] = useState(false);
   const [dialogImage, setDialogImage] = useState<{ src: string; alt: string } | null>(null);
-  const [hoverImage, setHoverImage] = useState<{ src: string; alt: string } | null>(null);
 
   useEffect(() => {
     const close = (event: KeyboardEvent) => event.key === "Escape" && setDialogImage(null);
@@ -23,7 +22,7 @@ export default function Home() {
 
   const Figure = ({ src, alt, caption, className = "" }: { src: string; alt: string; caption: string; className?: string }) => (
     <figure className={`paper-figure ${className}`}>
-      <button onMouseEnter={() => setHoverImage({ src, alt })} onMouseLeave={() => setHoverImage(null)} onFocus={() => setHoverImage({ src, alt })} onBlur={() => setHoverImage(null)} onClick={() => { setHoverImage(null); setDialogImage({ src, alt }); }} aria-label={`Expand ${caption}`}><img src={src} alt={alt} /></button>
+      <button type="button" onClick={() => setDialogImage({ src, alt })} aria-label={`Expand ${caption}`}><img src={src} alt={alt} /></button>
       <figcaption>{caption}<span>Click to expand ↗</span></figcaption>
     </figure>
   );
@@ -57,7 +56,6 @@ export default function Home() {
 
     <section className="band bibtex" id="BibTeX"><div className="shell"><div className="bibtex-head"><div><p className="eyebrow">Citation</p><h2>BibTeX</h2></div><button onClick={copyBibtex}>{copied ? "Copied ✓" : "Copy citation"}</button></div><pre id="bibtex-code" tabIndex={-1}><code>{paper.bibtex}</code></pre></div></section>
     <footer><div className="shell"><strong>HIVE-3D</strong><p>Hierarchical Voxel Enhancement for High-Quality 3D Scene Generation</p><span>ICML 2026</span></div></footer>
-    {hoverImage && !dialogImage && <div className="hover-preview" aria-hidden="true"><img src={hoverImage.src} alt="" /></div>}
     {dialogImage && <div className="dialog-backdrop" role="presentation" onClick={() => setDialogImage(null)}><div className="image-dialog" role="dialog" aria-modal="true" aria-label={dialogImage.alt} onClick={event => event.stopPropagation()}><button autoFocus onClick={() => setDialogImage(null)} aria-label="Close expanded image">×</button><img src={dialogImage.src} alt={dialogImage.alt}/></div></div>}
   </main>;
 }

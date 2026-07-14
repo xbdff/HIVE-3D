@@ -48,22 +48,19 @@ test("the visual system is light, responsive, and accessible", async () => {
   assert.match(css, /@media\s*\(max-width:/);
 });
 
-test("paper figures reveal a full-image hover preview over a faded page", async () => {
+test("paper figures only lift on hover so clicking remains distinct", async () => {
   const page = await readFile(new URL("app/page.tsx", root), "utf8");
   const css = await readFile(new URL("app/globals.css", root), "utf8");
-  assert.match(page, /hoverImage/);
-  assert.match(page, /onMouseEnter=\{\(\) => setHoverImage/);
-  assert.match(page, /onMouseLeave=\{\(\) => setHoverImage\(null\)\}/);
-  assert.match(page, /className="hover-preview"/);
-  assert.match(css, /\.hover-preview\{position:fixed;inset:0/);
-  assert.match(css, /object-fit:contain/);
-  assert.match(css, /backdrop-filter:blur/);
+  assert.doesNotMatch(page, /hoverImage/);
+  assert.doesNotMatch(page, /className="hover-preview"/);
+  assert.match(css, /\.paper-figure button:hover\{[^}]*translateY/);
 });
 
 test("clicking a paper figure opens a viewport-sized faded lightbox", async () => {
   const page = await readFile(new URL("app/page.tsx", root), "utf8");
   const css = await readFile(new URL("app/globals.css", root), "utf8");
   assert.match(page, /setDialogImage\(\{ src, alt \}\)/);
+  assert.match(page, /onClick=\{\(\) => setDialogImage\(\{ src, alt \}\)\}/);
   assert.match(page, /className="dialog-backdrop"/);
   assert.match(css, /\.image-dialog\{[^}]*width:94vw;[^}]*height:90vh/);
   assert.match(css, /\.image-dialog img\{[^}]*max-width:100%;[^}]*max-height:100%;[^}]*object-fit:contain/);
