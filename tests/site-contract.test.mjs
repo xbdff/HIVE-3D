@@ -14,14 +14,14 @@ test("the project page exposes the complete bright academic narrative", async ()
   }
 });
 
-test("the hero uses a blue title treatment with the venue below the title", async () => {
+test("the hero uses a green title treatment with the venue below the title", async () => {
   const page = await readFile(new URL("app/page.tsx", root), "utf8");
   const data = await readFile(new URL("app/paper-data.ts", root), "utf8");
   const css = await readFile(new URL("app/globals.css", root), "utf8");
   assert.match(page, /<h1>[\s\S]*<\/h1>\s*<p className="venue-line">\{paper\.venue\}<\/p>/);
   assert.match(data, /venue:\s*"ICML 2026"/);
   assert.doesNotMatch(data, /PMLR 306/);
-  assert.match(css, /--accent:\s*#6f8fc9/i);
+  assert.match(css, /--accent:\s*#6f9f86/i);
   assert.match(css, /\.publication-hero h1 em\{color:var\(--accent\)/);
   assert.match(css, /\.venue-line\{[^}]*border:\s*1\.5px solid/);
   assert.match(css, /\.venue-line\{[^}]*font-size:\s*16px/);
@@ -37,8 +37,10 @@ test("publication data preserves camera-ready facts and metrics", async () => {
 
 test("the visual system is light, responsive, and accessible", async () => {
   const css = await readFile(new URL("app/globals.css", root), "utf8");
-  assert.match(css, /--accent:\s*#6f8fc9/i);
-  assert.match(css, /--surface:\s*#f8faff/i);
+  assert.match(css, /--accent:\s*#6f9f86/i);
+  assert.match(css, /--surface:\s*#f7faf8/i);
+  assert.match(css, /\.paper-figure button:hover\{[^}]*transform:translateY\(-6px\)/);
+  assert.match(css, /transition:transform \.25s ease,box-shadow \.25s ease/);
   assert.match(css, /\.publication-links/);
   assert.match(css, /border-radius:\s*999px/);
   assert.match(css, /:focus-visible/);
