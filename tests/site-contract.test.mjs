@@ -48,6 +48,15 @@ test("the visual system is light, responsive, and accessible", async () => {
   assert.match(css, /@media\s*\(max-width:/);
 });
 
+test("the header is a floating cobalt-blue navigation capsule", async () => {
+  const css = await readFile(new URL("app/globals.css", root), "utf8");
+  assert.match(css, /\.site-header\{[^}]*top:12px;[^}]*width:min\(1120px,calc\(100% - 32px\)\);[^}]*border-radius:999px;[^}]*box-shadow:/);
+  assert.match(css, /\.wordmark\{[^}]*color:#2563eb/);
+  assert.match(css, /\.site-header nav\{[^}]*color:#2563eb/);
+  assert.match(css, /\.site-header nav a:hover\{[^}]*background:#eff6ff/);
+  assert.match(css, /\.header-link\{[^}]*background:#2563eb;[^}]*color:#fff;[^}]*border-radius:999px/);
+});
+
 test("paper figures only lift on hover so clicking remains distinct", async () => {
   const page = await readFile(new URL("app/page.tsx", root), "utf8");
   const css = await readFile(new URL("app/globals.css", root), "utf8");
