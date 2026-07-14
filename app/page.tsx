@@ -31,8 +31,8 @@ export default function Home() {
     <header className="site-header"><a className="wordmark" href="#top">HIVE-3D</a><nav aria-label="Section navigation">{navItems.map(([id,label]) => <a key={id} href={`#${id}`}>{label}</a>)}</nav><a className="header-link" href={paper.links.paper}>Paper ↗</a></header>
 
     <section className="publication-hero" id="top">
-      <p className="venue-pill">{paper.venue}</p>
       <h1><em>HIVE-3D</em>: Hierarchical Voxel Enhancement for High-Quality 3D Scene Generation</h1>
+      <p className="venue-line">{paper.venue}</p>
       <p className="authors">{paper.authors.map((author, index) => <span key={author}>{author}{index < paper.authors.length - 1 ? ", " : ""}</span>)}</p>
       <div className="affiliations"><p><sup>1</sup> {paper.affiliations[0]}</p><p><sup>2</sup> {paper.affiliations[1]}</p><small>* Equal contribution</small></div>
       <div className="publication-links"><a href={paper.links.paper}>▤ Paper</a><span aria-disabled="true">⌘ Code · Soon</span><span aria-disabled="true">◇ Model · Soon</span></div>

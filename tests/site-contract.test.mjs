@@ -14,9 +14,20 @@ test("the project page exposes the complete bright academic narrative", async ()
   }
 });
 
+test("the hero uses a blue title treatment with the venue below the title", async () => {
+  const page = await readFile(new URL("app/page.tsx", root), "utf8");
+  const data = await readFile(new URL("app/paper-data.ts", root), "utf8");
+  const css = await readFile(new URL("app/globals.css", root), "utf8");
+  assert.match(page, /<h1>[\s\S]*<\/h1>\s*<p className="venue-line">\{paper\.venue\}<\/p>/);
+  assert.match(data, /venue:\s*"ICML 2026"/);
+  assert.doesNotMatch(data, /PMLR 306/);
+  assert.match(css, /--accent:\s*#2563eb/i);
+  assert.match(css, /\.publication-hero h1 em\{color:var\(--accent\)/);
+});
+
 test("publication data preserves camera-ready facts and metrics", async () => {
   const data = await readFile(new URL("app/paper-data.ts", root), "utf8");
-  for (const fact of ["Bin Zang", "Rengan Xie", "PMLR 306", 'CD: "0.0035"', 'fScore: "84.34"', 'iou: "0.7449"', 'SSIM: "0.79"', 'PSNR: "13.39"', 'LPIPS: "0.33"', 'CLIP: "0.97"']) {
+  for (const fact of ["Bin Zang", "Rengan Xie", 'volume    = \\{306\\}', 'CD: "0.0035"', 'fScore: "84.34"', 'iou: "0.7449"', 'SSIM: "0.79"', 'PSNR: "13.39"', 'LPIPS: "0.33"', 'CLIP: "0.97"']) {
     assert.match(data, new RegExp(fact));
   }
   assert.match(data, /TRELLIS/);
@@ -24,8 +35,8 @@ test("publication data preserves camera-ready facts and metrics", async () => {
 
 test("the visual system is light, responsive, and accessible", async () => {
   const css = await readFile(new URL("app/globals.css", root), "utf8");
-  assert.match(css, /--accent:\s*#2f9e72/i);
-  assert.match(css, /--surface:\s*#f5f6f5/i);
+  assert.match(css, /--accent:\s*#2563eb/i);
+  assert.match(css, /--surface:\s*#f5f8ff/i);
   assert.match(css, /\.publication-links/);
   assert.match(css, /border-radius:\s*999px/);
   assert.match(css, /:focus-visible/);

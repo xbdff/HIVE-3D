@@ -1,6 +1,6 @@
 export const paper = {
   title: "HIVE-3D: Hierarchical Voxel Enhancement for High-Quality 3D Scene Generation",
-  venue: "ICML 2026 · PMLR 306",
+  venue: "ICML 2026",
   authors: ["Bin Zang*", "Wenting Zheng*", "Xiaoliang Luo", "Zhiyuan Fang", "Shi Li", "Lvchun Wang", "Wei Yu", "Yi Zhao", "Tian Xie", "Yuchi Huo", "Rengan Xie"],
   affiliations: ["State Key Laboratory of CAD&CG, Zhejiang University", "China Mobile (Jiangxi) Virtual Reality Technology Co., Ltd."],
   abstract: "Recently, a line of works can generate impressive 3D objects from a single image, but they are limited by restricted representation resolution, making them unsuitable for 3D scene generation. We introduce HIVE-3D, a novel method for high-quality 3D scene generation based on a hierarchical voxel enhancement framework. Given a single scene image, HIVE-3D first produces a coarse initial scene, aligns hierarchical 2D image components with 3D scene components, and organizes them into a component tree. A voxel super-resolution model then refines each target instance while maintaining consistency with its coarse voxels. Coarse-to-fine enhancement of images and voxels produces high-resolution, high-quality 3D scenes and achieves state-of-the-art performance.",
