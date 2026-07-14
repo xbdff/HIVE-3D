@@ -14,7 +14,8 @@ if (!response.ok) throw new Error(`Static render failed with ${response.status}`
 
 const html = (await response.text())
   .replaceAll('href="/', 'href="./')
-  .replaceAll('src="/', 'src="./');
+  .replaceAll('src="/', 'src="./')
+  .replaceAll('import("/assets/', 'import("./assets/');
 
 await mkdir(new URL("../dist/client/", import.meta.url), { recursive: true });
 await writeFile(new URL("../dist/client/index.html", import.meta.url), html);

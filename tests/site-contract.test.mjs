@@ -76,4 +76,6 @@ test("the build keeps GitHub Pages static-export support", async () => {
   assert.match(packageJson, /scripts\/export-static\.mjs/);
   assert.match(exporter, /dist\/client\/index\.html/);
   assert.match(exporter, /\.nojekyll/);
+  assert.match(exporter, /import\(\\?\"\/assets\//);
+  assert.match(exporter, /import\(\\?\"\.\/assets\//);
 });
