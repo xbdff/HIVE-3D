@@ -36,6 +36,12 @@ test("publication data preserves camera-ready facts and metrics", async () => {
   assert.match(data, /TRELLIS/);
 });
 
+test("the final author is marked as the corresponding author", async () => {
+  const page = await readFile(new URL("app/page.tsx", root), "utf8");
+  assert.match(page, /index === paper\.authors\.length - 1 \? <sup>†<\/sup> : null/);
+  assert.match(page, /† Corresponding author/);
+});
+
 test("the visual system is light, responsive, and accessible", async () => {
   const css = await readFile(new URL("app/globals.css", root), "utf8");
   assert.match(css, /--accent:\s*#2563eb/i);
