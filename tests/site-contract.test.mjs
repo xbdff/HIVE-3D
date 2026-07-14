@@ -63,7 +63,7 @@ test("clicking a paper figure opens a viewport-sized faded lightbox", async () =
   assert.match(page, /onClick=\{\(\) => setDialogImage\(\{ src, alt \}\)\}/);
   assert.match(page, /className="dialog-backdrop"/);
   assert.match(css, /\.image-dialog\{[^}]*width:94vw;[^}]*height:90vh/);
-  assert.match(css, /\.image-dialog img\{[^}]*max-width:100%;[^}]*max-height:100%;[^}]*object-fit:contain/);
+  assert.match(css, /\.image-dialog img\{width:100%;height:100%;[^}]*object-fit:contain/);
   assert.match(css, /\.dialog-backdrop\{[^}]*backdrop-filter:blur/);
 });
 
