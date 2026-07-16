@@ -71,6 +71,17 @@ test("publication action pills lift and deepen from a light-blue resting state",
   assert.match(css, /\.publication-links a:hover,\.publication-links span:hover\{[^}]*transform:translateY\(-4px\);[^}]*background:#1e40af;[^}]*color:#fff;[^}]*box-shadow:/);
 });
 
+test("the publication actions include a linked arXiv badge with a local icon", async () => {
+  const page = await readFile(new URL("app/page.tsx", root), "utf8");
+  const data = await readFile(new URL("app/paper-data.ts", root), "utf8");
+  const css = await readFile(new URL("app/globals.css", root), "utf8");
+  assert.match(data, /arxiv:\s*"https:\/\/arxiv\.org\/abs\/2607\.13468"/);
+  assert.match(page, /href=\{paper\.links\.arxiv\}/);
+  assert.match(page, /className="arxiv-mark"/);
+  assert.match(page, /target="_blank"/);
+  assert.match(css, /\.arxiv-mark\{[^}]*width:18px;[^}]*height:18px/);
+});
+
 test("paper figures only lift on hover so clicking remains distinct", async () => {
   const page = await readFile(new URL("app/page.tsx", root), "utf8");
   const css = await readFile(new URL("app/globals.css", root), "utf8");

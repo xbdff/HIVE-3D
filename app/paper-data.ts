@@ -19,7 +19,7 @@ export const paper = {
     { name: "Ours", SSIM: "0.79", PSNR: "13.39", LPIPS: "0.33", CLIP: "0.97" },
   ],
   limitation: "HIVE-3D relies on the initial scene produced by TRELLIS. If objects are missed or incomplete at this stage, correspondence and registration may become unreliable.",
-  links: { paper: "./paper/HIVE-3D_final.pdf", code: "Coming Soon", model: "Coming Soon" },
+  links: { paper: "./paper/HIVE-3D_final.pdf", arxiv: "https://arxiv.org/abs/2607.13468", code: "Coming Soon", model: "Coming Soon" },
   bibtex: `@inproceedings{zang2026hive3d,
   title     = {HIVE-3D: Hierarchical Voxel Enhancement for High-Quality 3D Scene Generation},
   author    = {Zang, Bin and Zheng, Wenting and Luo, Xiaoliang and Fang, Zhiyuan and Li, Shi and Wang, Lvchun and Yu, Wei and Zhao, Yi and Xie, Tian and Huo, Yuchi and Xie, Rengan},

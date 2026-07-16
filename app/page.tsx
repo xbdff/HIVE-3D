@@ -35,7 +35,7 @@ export default function Home() {
       <p className="venue-line">{paper.venue}</p>
       <p className="authors">{paper.authors.map((author, index) => <span key={author}>{author}{index === paper.authors.length - 1 ? <sup>†</sup> : null}{index < paper.authors.length - 1 ? ", " : ""}</span>)}</p>
       <div className="affiliations"><p><sup>1</sup> {paper.affiliations[0]}</p><p><sup>2</sup> {paper.affiliations[1]}</p><small>* Equal contribution · † Corresponding author</small></div>
-      <div className="publication-links"><a href={paper.links.paper}>▤ Paper</a><span aria-disabled="true">⌘ Code · Soon</span><span aria-disabled="true">◇ Model · Soon</span></div>
+      <div className="publication-links"><a href={paper.links.paper}>▤ Paper</a><a href={paper.links.arxiv} target="_blank" rel="noreferrer" aria-label="Open HIVE-3D on arXiv"><svg className="arxiv-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4.5 12 12l7-7.5M5 19.5 12 12l7 7.5"/><path d="M8.5 3.5h7M8.5 20.5h7"/></svg>arXiv</a><span aria-disabled="true">⌘ Code · Soon</span><span aria-disabled="true">◇ Model · Soon</span></div>
     </section>
 
     <section className="teaser shell" id="teaser"><Figure src="./media/teaser.png" alt="HIVE-3D progressively enhances a scene from coarse to fine hierarchy levels" caption="HIVE-3D progressively enhances a coarse scene into high-resolution components and a coherent final scene." /></section>
