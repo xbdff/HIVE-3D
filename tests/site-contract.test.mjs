@@ -9,7 +9,7 @@ test("the project page exposes the complete bright academic narrative", async ()
   for (const marker of ["publication-hero", 'id="teaser"', 'id="abstract"', 'id="method"', 'id="results"', 'id="limitations"', 'id="BibTeX"']) {
     assert.match(page, new RegExp(marker));
   }
-  for (const path of ["teaser.png", "method.png", "qualitative.png", "additional-results.png", "ablation.png"]) {
+  for (const path of ["teaser-hd.png", "method-hd.png", "qualitative-hd.png", "additional-results.png", "ablation.png"]) {
     assert.match(page, new RegExp(path.replace(".", "\\.")));
   }
 });
