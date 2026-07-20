@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type MouseEvent } from "react";
 import { paper } from "./paper-data";
 
 const navItems = [["abstract", "Abstract"], ["method", "Method"], ["results", "Results"], ["BibTeX", "BibTeX"]];
@@ -20,6 +20,15 @@ export default function Home() {
     catch { document.querySelector<HTMLElement>("#bibtex-code")?.focus(); }
   }
 
+  function navigateToSection(event: MouseEvent<HTMLAnchorElement>, id: string) {
+    event.preventDefault();
+    const target = document.getElementById(id);
+    if (!target) return;
+    target.scrollIntoView({ behavior: "auto", block: "start" });
+    window.history.replaceState(null, "", window.location.pathname + window.location.search);
+    event.currentTarget.blur();
+  }
+
   const Figure = ({ src, alt, caption, className = "" }: { src: string; alt: string; caption: string; className?: string }) => (
     <figure className={`paper-figure ${className}`}>
       <button type="button" onClick={() => setDialogImage({ src, alt })} aria-label={`Expand ${caption}`}><img src={src} alt={alt} /></button>
@@ -28,7 +37,7 @@ export default function Home() {
   );
 
   return <main>
-    <header className="site-header"><a className="wordmark" href="#top">HIVE-3D</a><nav aria-label="Section navigation">{navItems.map(([id,label]) => <a key={id} href={`#${id}`}>{label}</a>)}</nav><a className="header-link" href={paper.links.paper}>Paper ↗</a></header>
+    <header className="site-header"><a className="wordmark" href="#top" onClick={event => navigateToSection(event, "top")}>HIVE-3D</a><nav aria-label="Section navigation">{navItems.map(([id,label]) => <a key={id} href={`#${id}`} onClick={event => navigateToSection(event, id)}>{label}</a>)}</nav><a className="header-link" href={paper.links.paper}>Paper ↗</a></header>
 
     <section className="publication-hero" id="top">
       <h1><em>HIVE-3D</em>: Hierarchical Voxel Enhancement for High-Quality 3D Scene Generation</h1>

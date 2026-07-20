@@ -115,3 +115,12 @@ test("the build keeps GitHub Pages static-export support", async () => {
   assert.match(exporter, /import\(\\?\"\/assets\//);
   assert.match(exporter, /import\(\\?\"\.\/assets\//);
 });
+
+test("section navigation does not leave a hash or focused link that can re-lock scrolling", async () => {
+  const page = await readFile(new URL("app/page.tsx", root), "utf8");
+  assert.match(page, /event\.preventDefault\(\)/);
+  assert.match(page, /target\.scrollIntoView\(\{ behavior: "auto", block: "start" \}\)/);
+  assert.match(page, /window\.history\.replaceState\(null, "", window\.location\.pathname \+ window\.location\.search\)/);
+  assert.match(page, /event\.currentTarget\.blur\(\)/);
+  assert.match(page, /onClick=\{event => navigateToSection\(event, id\)\}/);
+});
